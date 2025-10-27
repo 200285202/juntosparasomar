@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONG Esperança</title>
+
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Fonte do Google -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Seu CSS principal -->
+<link rel="stylesheet" type="text/css" href="CSS/Estilo22.css">
+
+  <style>
+    :root {
+      --green-1: #1A5D1A;
+      --green-2: #2E8B57;
+      --green-3: #4CAF50;
+      --green-light: #E8F5E9;
+      --white: #ffffff;
+      --muted: #6B6B6B;
+      --light-gray: #f8f9fa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--white);
+      color: #111827;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--green-1), var(--green-2));
+      padding: 1.2rem 2rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 4px 15px rgba(26, 93, 26, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin: 0 1.2rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--green-light);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--green-light);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Menu Hamburguer */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      margin: 3px 0;
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(26, 93, 26, 0.8), rgba(46, 139, 87, 0.9)), url('https://images.unsplash.com/photo-1545987796-200677ee1011?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      color: var(--green-1);
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--green-2), var(--green-1));
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Ways to Help Grid */
+    .help-ways {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .help-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      border-top: 5px solid var(--green-2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .help-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--green-1), var(--green-2));
+    }
+
+    .help-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(46, 139, 87, 0.15);
+    }
+
+    .help-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2.2rem;
+      color: var(--green-2);
+    }
+
+    .help-card h3 {
+      color: var(--green-1);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .help-card p {
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-2), var(--green-1));
+      color: var(--white);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      justify-content: center;
+      margin-top: auto;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(46, 139, 87, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green-1);
+      border: 2px solid var(--green-2);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--green-2);
+      color: white;
+    }
+
+    /* Impact Section */
+    .impact {
+      background: linear-gradient(135deg, var(--green-light), #e8f4ea);
+      padding: 5rem 0;
+      margin-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .impact::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a5d1a' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .impact-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .impact-stat {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    .impact-stat h3 {
+      font-size: 2.5rem;
+      color: var(--green-1);
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-stat p {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Donation Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .modal h3 {
+      color: var(--green-1);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .donation-options {
+      margin-top: 1.5rem;
+    }
+
+    .donation-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .donation-btn {
+      background: var(--green-light);
+      border: 2px solid var(--green-3);
+      color: var(--green-1);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .donation-btn:hover, .donation-btn.selected {
+      background: var(--green-2);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .donation-input-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .donation-input {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid var(--green-3);
+      border-radius: 50px;
+      width: 200px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .donation-input::placeholder {
+      color: var(--muted);
+    }
+
+    /* Items List */
+    .items-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .item-card {
+      background: var(--green-light);
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      color: var(--green-1);
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--green-1), var(--green-2));
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 0 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+
+    .footer-column h3 {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-column h3::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--green-light);
+    }
+
+    .footer-column p, .footer-column a {
+      color: var(--green-light);
+      margin-bottom: 1rem;
+      display: block;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-column a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--green-2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+      transition: var(--transition);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 99;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--green-1);
+      transform: translateY(-5px);
+    }
+
+    /* Botões Flutuantes de Redes Sociais */
+    .floating-buttons {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 98;
+    }
+
+    .floating-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .floating-btn.whatsapp {
+      background: #25D366;
+    }
+
+    .floating-btn.instagram {
+      background: #E4405F;
+    }
+
+    .floating-btn.facebook {
+      background: #1877F2;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--green-1), var(--green-2));
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        z-index: 100;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      .nav-links li {
+        margin: 1.5rem 0;
+      }
+      
+      .nav-links a {
+        font-size: 1.2rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .help-ways {
+        grid-template-columns: 1fr;
+      }
+      
+      .donation-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .donation-input-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo {
+        height: 50px;
+      }
+      
+      .floating-buttons {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+      
+      .back-to-top {
+        bottom: 90px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .impact-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-column h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .logo {
+        height: 45px;
+      }
+      
+      .floating-buttons {
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .floating-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <!-- Substitua "logo.png" pelo caminho da sua logo -->
+      <img src="logo.png" alt="Logo ONG Esperança" class="logo">
+      <div class="logo-text">
+        <i class="fas fa-hands-helping"></i>
+        ONG Esperança
+      </div>
+    </div>
+    
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="como-ajudar.html">Como Ajudar</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Como Ajudar</h1>
+    <p>Existem diversas formas de contribuir com a ONG Esperança. Escolha a que mais combina com você e faça a diferença na vida de quem mais precisa!</p>
+    <a href="#formas-ajudar" class="btn-primary">Ver Formas de Ajudar</a>
+  </div>
+
+  <section id="formas-ajudar">
+    <div class="section-header">
+      <h2>Formas de Ajudar</h2>
+      <p class="section-subtitle">Cada contribuição, por menor que seja, tem um impacto transformador. Veja como você pode fazer parte dessa mudança:</p>
+    </div>
+    
+    <div class="help-ways">
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <h3>Seja Voluntário e Ganhe Certificado</h3>
+        <p>Doe seu tempo e talento para nossos projetos. Oferecemos certificado de horas voluntárias que pode ser usado para complementar seu currículo e horas complementares em faculdades.</p>
+        <a href="#" class="btn-primary">Quero ser Voluntário</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>Doe Agora e Faça a Diferença</h3>
+        <p>Com apenas R$ 30 por mês, você financia materiais escolares para uma criança. Doações únicas também são bem-vindas e aplicadas diretamente em nossos projetos.</p>
+        <button class="btn-primary" id="openDonationModal">Fazer Doação</button>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-box-open"></i>
+        </div>
+        <h3>Doe Itens</h3>
+        <p>Aceitamos doações de roupas, calçados, alimentos não perecíveis, material escolar, brinquedos e produtos de higiene. Sua doação será direcionada para famílias atendidas.</p>
+        <a href="#" class="btn-primary">Ver Lista de Itens</a>
+        <a href="#" class="btn-secondary">Agendar Entrega</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Contrate Adolescentes Acolhidos</h3>
+        <p>Ofereça oportunidades de primeiro emprego para jovens a partir de 14 anos. Temos programas de capacitação e podemos conectar você a talentos em busca de experiência.</p>
+        <a href="#" class="btn-primary">Conhecer os Talentos</a>
+        <a href="#" class="btn-secondary">Cadastrar Vaga</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <h3>Torne-se um Padrinho ou Madrinha</h3>
+        <p>Seja uma referência afetiva para uma criança ou adolescente. O apadrinhamento não envolve custos financeiros, mas sim um compromisso de apoio emocional e orientação.</p>
+        <a href="#" class="btn-primary">Ser Padrinho/Madrinha</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-project-diagram"></i>
+        </div>
+        <h3>Financie Projetos ou Doe Serviços</h3>
+        <p>Apoie financeiramente um projeto específico ou doe serviços profissionais (advocacia, contabilidade, design, etc.) para fortalecer nossa organização.</p>
+        <a href="#" class="btn-primary">Conhecer Projetos</a>
+        <a href="#" class="btn-secondary">Oferecer Serviços</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-share-alt"></i>
+        </div>
+        <h3>Divulgue Nossa Causa</h3>
+        <p>Compartilhe nosso trabalho em suas redes sociais, converse com amigos e familiares sobre nossa causa. A conscientização é uma forma poderosa de apoio.</p>
+        <a href="#" class="btn-primary">Compartilhar</a>
+      </div>
+      
+      <div class="help-card">
+        <div class="help-icon">
+          <i class="fas fa-gift"></i>
+        </div>
+        <h3>Doe através de Nota Fiscal</h3>
+        <p>Destine parte do seu imposto devido para nossos projetos através do programa de doação via nota fiscal. É simples e não tem custo adicional para você.</p>
+        <a href="#" class="btn-primary">Saiba Como Doar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact">
+    <div class="section-header">
+      <h2>Nosso Impacto</h2>
+      <p class="section-subtitle">Com a ajuda de pessoas como você, já conseguimos transformar milhares de vidas:</p>
+    </div>
+    
+    <div class="impact-content">
+      <div class="impact-stats">
+        <div class="impact-stat">
+          <h3>1.200+</h3>
+          <p>Crianças e adolescentes atendidos</p>
+        </div>
+        <div class="impact-stat">
+          <h3>350</h3>
+          <p>Voluntários ativos</p>
+        </div>
+        <div class="impact-stat">
+          <h3>85</h3>
+          <p>Adolescentes empregados</p>
+        </div>
+        <div class="impact-stat">
+          <h3>42</h3>
+          <p>Projetos realizados</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Doação -->
+  <div class="modal" id="donationModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h3>Faça sua Doação</h3>
+      <p>Escolha o valor da sua doação ou digite um valor personalizado:</p>
+      
+      <div class="donation-options">
+        <div class="donation-buttons">
+          <button class="donation-btn" data-value="20">R$ 20</button>
+          <button class="donation-btn" data-value="50">R$ 50</button>
+          <button class="donation-btn" data-value="80">R$ 80</button>
+          <button class="donation-btn" data-value="100">R$ 100</button>
+        </div>
+        <div class="donation-input-container">
+          <input type="number" class="donation-input" id="otherValue" placeholder="Outro valor" />
+        </div>
+        <button class="btn-primary" id="sendDonation" style="width: 100%;">
+          <i class="fas fa-paper-plane"></i> Continuar com a Doação
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Itens para Doação -->
+  <div class="modal" id="itemsModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeItemsModal">&times;</span>
+      <h3>Itens que Precisamos</h3>
+      <p>Confira nossa lista de itens em falta e doe o que puder:</p>
+      
+      <div class="items-list">
+        <div class="item-card">Roupas infantis</div>
+        <div class="item-card">Calçados</div>
+        <div class="item-card">Material escolar</div>
+        <div class="item-card">Brinquedos educativos</div>
+        <div class="item-card">Alimentos não perecíveis</div>
+        <div class="item-card">Produtos de higiene</div>
+        <div class="item-card">Livros infantis</div>
+        <div class="item-card">Fraldas</div>
+      </div>
+      
+      <p style="margin-top: 1.5rem; text-align: center;">Entre em contato para combinar a entrega: (11) 1234-5678</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>ONG Esperança</h3>
+        <p>Trabalhamos para transformar vidas e construir um futuro melhor através da educação, saúde e solidariedade.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contato</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Rua das Flores, 123 - Centro, São Paulo - SP</p>
+        <p><i class="fas fa-phone"></i> (11) 1234-5678</p>
+        <p><i class="fas fa-envelope"></i> contato@ongesperanca.org</p>
+      </div>
+      <div class="footer-column">
+        <h3>Links Rápidos</h3>
+        <a href="index.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="como-ajudar.html">Como Ajudar</a>
+        <a href="contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ONG Esperança — Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Botões Flutuantes de Redes Sociais -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/5511999999999" class="floating-btn whatsapp" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://instagram.com/ongesperanca" class="floating-btn instagram" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://facebook.com/ongesperanca" class="floating-btn facebook" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+  </div>
+
+  <a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script>
+    // Menu Hamburguer
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Modal de Doação
+    const donationModal = document.getElementById('donationModal');
+    const openDonationModal = document.getElementById('openDonationModal');
+    const closeModal = document.getElementById('closeModal');
+    const sendDonation = document.getElementById('sendDonation');
+    let selectedValue = null;
+
+    openDonationModal.addEventListener('click', () => {
+      donationModal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', () => {
+      donationModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === donationModal) {
+        donationModal.style.display = 'none';
+      }
+    });
+
+    document.querySelectorAll('.donation-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedValue = btn.dataset.value;
+        document.querySelectorAll('.donation-btn').forEach(b => {
+          b.classList.remove('selected');
+        });
+        btn.classList.add('selected');
+      });
+    });
+
+    sendDonation.addEventListener('click', () => {
+      const otherValue = document.getElementById('otherValue').value;
+      const value = otherValue || selectedValue;
+      if(!value){
+        alert('Por favor, selecione ou digite um valor para doar.');
+        return;
+      }
+      const mensagem = encodeURIComponent(`Olá! Quero fazer uma doação de R$${value} para a ONG Esperança.`);
+      const telefone = '5511999999999';
+      window.open(`https://wa.me/${telefone}?text=${mensagem}`);
+      donationModal.style.display = 'none';
+    });
+
+    // Modal de Itens
+    const itemsModal = document.getElementById('itemsModal');
+    const openItemsModal = document.querySelector('a[href="#"]');
+    const closeItemsModal = document.getElementById('closeItemsModal');
+
+    // Simulando a abertura do modal de itens (seria implementado com os links reais)
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+      if (btn.textContent.includes('Ver Lista de Itens')) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          itemsModal.style.display = 'flex';
+        });
+      }
+    });
+
+    closeItemsModal.addEventListener('click', () => {
+      itemsModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === itemsModal) {
+        itemsModal.style.display = 'none';
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      // Back to top button
+      const backToTop = document.querySelector('.back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

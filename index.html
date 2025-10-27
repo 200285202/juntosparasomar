@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONG Esperança</title>
+
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Fonte do Google -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Seu CSS principal -->
+<link rel="stylesheet" type="text/css" href="CSS/Estilo22.css">
+
+
+  <style>
+    :root {
+      --azul-1: #1E40AF;
+      --azul-2: #3675db;
+      --azul-3: #93c4fd;
+      --azul-light: #DBEAFE;
+      --white: #ffffff;
+      --muted: #6B6B6B;
+      --light-gray: #f8f9fa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--white);
+      color: #111827;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-1), var(--azul-2));
+      padding: 1.2rem 2rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin: 0 1.2rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--azul-light);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--azul-light);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Menu Hamburguer */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      margin: 3px 0;
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Carousel Aprimorado */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 80vh;
+      background-color: #f0f9ff;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      width: 400%;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      flex: 1 0 25%; /* Corrigido para 25% já que temos 4 slides (100%/4=25%) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Alterado de 'contain' para 'cover' para melhor preenchimento */
+      display: block;
+      background-color: #352c2c;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3); /* Overlay mais suave */
+    }
+
+    .slide-overlay h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .slide-overlay p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 2rem;
+      z-index: 10; /* Garantir que fique acima do conteúdo */
+    }
+
+    .carousel-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      color: var(--azul-1);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover {
+      background: var(--white);
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .carousel-indicators {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      z-index: 10; /* Garantir que fique acima do conteúdo */
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .indicator.active {
+      background: var(--white);
+      transform: scale(1.2);
+    }
+
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      color: var(--azul-1);
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--azul-2), var(--azul-1));
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Doe Agora */
+    .donation-section {
+      background: linear-gradient(135deg, var(--azul-2), var(--azul-1));
+      color: var(--white);
+      padding: 5rem 2rem;
+      border-radius: 30px;
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 1000px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donation-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .donation-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .donation-section h2 {
+      color: var(--white);
+    }
+
+    .donation-section p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--azul-1);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .donation-options {
+      margin-top: 2rem;
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .donation-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .donation-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .donation-btn:hover, .donation-btn.selected {
+      background: var(--white);
+      color: var(--azul-1);
+      transform: translateY(-3px);
+    }
+
+    .donation-input-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .donation-input {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      width: 200px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .donation-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Serviços */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      border-top: 5px solid var(--azul-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--azul-1), var(--azul-2));
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(120, 147, 190, 0.15);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--azul-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: var(--azul-2);
+    }
+
+    .service-card h3 {
+      color: var(--azul-1);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .service-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background-color: var(--azul-light);
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--azul-1), var(--azul-2));
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 0 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+
+    .footer-column h3 {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-column h3::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--azul-light);
+    }
+
+    .footer-column p, .footer-column a {
+      color: var(--azul-light);
+      margin-bottom: 1rem;
+      display: block;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-column a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--azul-2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      transition: var(--transition);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 99;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--azul-1);
+      transform: translateY(-5px);
+    }
+
+    /* Botões Flutuantes de Redes Sociais */
+    .floating-buttons {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 98;
+    }
+
+    .floating-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .floating-btn.whatsapp {
+      background: #25D366;
+    }
+
+    .floating-btn.instagram {
+      background: #E4405F;
+    }
+
+    .floating-btn.facebook {
+      background: #1877F2;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--azul-1), var(--azul-2));
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        z-index: 100;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      .nav-links li {
+        margin: 1.5rem 0;
+      }
+      
+      .nav-links a {
+        font-size: 1.2rem;
+      }
+      
+      .carousel {
+        height: 70vh;
+      }
+      
+      .slide-overlay h1 {
+        font-size: 2.5rem;
+      }
+      
+      .slide-overlay p {
+        font-size: 1.1rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .donation-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .donation-input-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo {
+        height: 50px;
+      }
+      
+      .floating-buttons {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+      
+      .back-to-top {
+        bottom: 90px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .slide-overlay h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .services {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-column h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .logo {
+        height: 45px;
+      }
+      
+      .floating-buttons {
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .floating-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <!-- Substitua "logo.png" pelo caminho da sua logo -->
+      <img src="logo.png" alt="Logo ONG Esperança" class="logo">
+      <div class="logo-text">
+       
+      
+      </div>
+    </div>
+    
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+       <li><a href="index.html">Home</a></li>
+        <li><a href="ajuda.html">Como ajudar</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="transparencia.html">Transparência</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide">
+          <img src="foto.jpeg" alt="Transformando Vidas" onerror="this.src='https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'">
+          <div class="slide-overlay">
+            <h1>Transformando Vidas</h1>
+            <p>Há mais de 10 anos levando esperança e oportunidades para comunidades em vulnerabilidade social</p>
+            <a href="#doe-agora" class="btn-primary">Doe Agora <i class="fas fa-heart"></i></a>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="01.jpeg" alt="Educação que Transforma" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'">
+          <div class="slide-overlay">
+            <h1>Educação que Transforma</h1>
+            <p>Oferecemos reforço escolar e oficinas culturais para crianças e adolescentes</p>
+            <a href="#servicos" class="btn-primary">Conheça Nossos Projetos</a>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="02.jpeg" alt="Junte-se a Nós" onerror="this.src='https://images.unsplash.com/photo-1549923746-7d0b672cd72a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'">
+          <div class="slide-overlay">
+            <h1>Junte-se a Nós</h1>
+            <p>Seja um voluntário e faça parte dessa transformação</p>
+            <a href="#doe-agora" class="btn-primary">Faça uma Doação</a>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="03.jpeg" alt="Fortalecendo Comunidades" onerror="this.src='https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'">
+          <div class="slide-overlay">
+            <h1>Fortalecendo Comunidades</h1>
+            <p>Trabalhamos para construir um futuro melhor através de ações comunitárias</p>
+            <a href="#servicos" class="btn-primary">Conheça Nossos Serviços</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-buttons">
+        <button class="carousel-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="carousel-indicators" id="carouselIndicators">
+        <div class="indicator active" data-slide="0"></div>
+        <div class="indicator" data-slide="1"></div>
+        <div class="indicator" data-slide="2"></div>
+        <div class="indicator" data-slide="3"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="donation-section" id="doe-agora">
+    <div class="donation-content">
+      <h2>Doe Agora</h2>
+      <p>Seja a mudança que você quer ver no mundo 💙 Cada doação é um passo para um futuro melhor!</p>
+      <button class="btn-primary" id="doarBtn">
+        <i class="fas fa-hand-holding-heart"></i> Fazer uma Doação
+      </button>
+
+      <div class="donation-options" id="donationOptions">
+        <div class="donation-buttons">
+          <button class="donation-btn" data-value="20">R$ 20</button>
+          <button class="donation-btn" data-value="50">R$ 50</button>
+          <button class="donation-btn" data-value="80">R$ 80</button>
+          <button class="donation-btn" data-value="100">R$ 100</button>
+        </div>
+        <div class="donation-input-container">
+          <input type="number" class="donation-input" id="otherValue" placeholder="Outro valor" />
+          <button class="btn-primary" id="sendDonation">
+            <i class="fas fa-paper-plane"></i> Enviar Doação
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="servicos">
+    <div class="section-header">
+      <h2>Nossos Serviços</h2>
+      <p class="section-subtitle">Conheça as ações que realizamos para transformar vidas e fortalecer comunidades.</p>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3>Refeições</h3>
+        <div class="service-image">
+          <img src="cafe.jpg" alt="Educação Infantil">
+        </div>
+        <p>Preparamos e distribuímos refeições com carinho para mulheres, crianças, idosos e famílias que enfrentam situações de vulnerabilidade.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-heartbeat"></i>
+        </div>
+        <h3>Atendimento à Saúde</h3>
+        <div class="service-image">
+          <img src="saude.jpg" alt="Atendimento à Saúde">
+        </div>
+        <p>Campanhas de vacinação, consultas e palestras sobre bem-estar e prevenção para garantir saúde e qualidade de vida às comunidades atendidas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Capacitação Profissional</h3>
+        <div class="service-image">
+          <img src="encontro.jpg" alt="Capacitação Profissional">
+        </div>
+        <p>Treinamentos e cursos gratuitos para jovens e adultos que buscam novas oportunidades no mercado de trabalho e desenvolvimento de habilidades.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Ações Comunitárias</h3>
+        <div class="service-image">
+          <img src="evento.jpg" alt="Ações Comunitárias">
+        </div>
+        <p>Eventos e mutirões que promovem solidariedade e fortalecem os laços da comunidade, criando redes de apoio e transformação social.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="section-header">
+      <h2>Contato</h2>
+      <p class="section-subtitle">Entre em contato conosco para saber mais sobre nossos projetos ou para se voluntariar.</p>
+    </div>
+    <!-- Adicione aqui um formulário de contato se desejar -->
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>ONG Junros Para Somar</h3>
+        <p>Transformando vidas há mais de 10 anos através de ações sociais e comunitárias.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contato</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Rua Exemplo, 123 - Cidade</p>
+        <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+        <p><i class="fas fa-envelope"></i> contato@ongesperanca.org</p>
+      </div>
+      <div class="footer-column">
+        <h3>Links Rápidos</h3>
+        <a href="#home">Home</a>
+        <a href="#servicos">Sobre Nóa</a>
+        <a href="#doe-agora">Como Ajudar</a>
+        <a href="#contato">Transparencia</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 ONG Esperança. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <div class="floating-buttons">
+    <a href="#" class="floating-btn whatsapp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="#" class="floating-btn instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="#" class="floating-btn facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+  </div>
+
+  <script>
+    // Carousel Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.getElementById('carouselTrack');
+      const slides = document.querySelectorAll('.carousel-slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+      
+      // Função para atualizar a posição do carousel
+      function updateCarousel() {
+        track.style.transform = `translateX(-${currentSlide * 25}%)`;
+        
+        // Atualizar indicadores
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('active', index === currentSlide);
+        });
+      }
+      
+      // Função para ir para um slide específico
+      function goToSlide(slideIndex) {
+        currentSlide = slideIndex;
+        updateCarousel();
+      }
+      
+      // Função para o próximo slide
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+      }
+      
+      // Função para o slide anterior
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+      }
+      
+      // Adicionar event listeners
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+      
+      indicators.forEach(indicator => {
+        indicator.addEventListener('click', function() {
+          const slideIndex = parseInt(this.getAttribute('data-slide'));
+          goToSlide(slideIndex);
+        });
+      });
+      
+      // Auto-play do carousel
+      let autoPlayInterval = setInterval(nextSlide, 5000);
+      
+      // Pausar auto-play quando o mouse estiver sobre o carousel
+      const carousel = document.querySelector('.carousel');
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+      });
+      
+      carousel.addEventListener('mouseleave', () => {
+        autoPlayInterval = setInterval(nextSlide, 5000);
+      });
+      
+      // Funcionalidade de doação
+      const doarBtn = document.getElementById('doarBtn');
+      const donationOptions = document.getElementById('donationOptions');
+      const donationBtns = document.querySelectorAll('.donation-btn');
+      const otherValueInput = document.getElementById('otherValue');
+      const sendDonationBtn = document.getElementById('sendDonation');
+      
+      doarBtn.addEventListener('click', function() {
+        donationOptions.style.display = 'block';
+      });
+      
+      donationBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          donationBtns.forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          otherValueInput.value = this.getAttribute('data-value');
+        });
+      });
+      
+      sendDonationBtn.addEventListener('click', function() {
+        const valor = otherValueInput.value || '0';
+        alert(`Obrigado pela sua doação de R$ ${valor}! Sua contribuição fará a diferença.`);
+        donationOptions.style.display = 'none';
+        otherValueInput.value = '';
+        donationBtns.forEach(b => b.classList.remove('selected'));
+      });
+      
+      // Menu mobile
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      
+      // Fechar menu ao clicar em um link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+      
+      // Header scroll effect
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+      
+      // Botão voltar ao topo
+      const backToTop = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+      
+      backToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
